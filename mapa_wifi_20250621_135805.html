@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4e0455bef95ace5d8911025d5798637c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; bottom: 30px; left: 30px; z-index:9999;
+        background: white; border: 2px solid #ccc; border-radius: 10px; padding: 10px">
+        <b>📊 Calidad de señal</b><br>
+        🟢 Buena: 1<br>
+        🟠 Intermedia: 2<br>
+        🔴 Mala: 7<br>
+        </div>
+    
+            <div class="folium-map" id="map_4e0455bef95ace5d8911025d5798637c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4e0455bef95ace5d8911025d5798637c = L.map(
+                "map_4e0455bef95ace5d8911025d5798637c",
+                {
+                    center: [-12.0170937, -77.0490895],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 17,
+  "zoomControl": true,
+  "preferCanvas": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_4e0455bef95ace5d8911025d5798637c);
+
+            
+
+        
+    
+            var tile_layer_c1ae53061c97d3bd1a355cc9417e649c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 1,
+  "maxZoom": 25,
+  "maxNativeZoom": 25,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c1ae53061c97d3bd1a355cc9417e649c.addTo(map_4e0455bef95ace5d8911025d5798637c);
+        
+    
+            var tile_layer_788608cfea8e20dcb8b91bfe1ecee7e4 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_788608cfea8e20dcb8b91bfe1ecee7e4.addTo(map_4e0455bef95ace5d8911025d5798637c);
+        
+    
+            var marker_cluster_c46070dde4912db2a6dd48d77a47e733 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_4057ae4099978d8df9abe148373fbdaf = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_c46070dde4912db2a6dd48d77a47e733);
+        
+    
+            var icon_8355574356b151491e8cedd22cd2607e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b2c11e32eac0e0b6bb7ad01e56c13677 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_57899a4e5f6b76d878dc085302fae0d0 = $(`<div id="html_57899a4e5f6b76d878dc085302fae0d0" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> hw_manage_1550<br>             <b>RSSI:</b> -68 dBm<br>             <b>MAC:</b> D8:10:9F:88:15:5B<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Buena<br>             <b>🕒</b> 2025-06-21T13:58:00.449824</div>`)[0];
+                popup_b2c11e32eac0e0b6bb7ad01e56c13677.setContent(html_57899a4e5f6b76d878dc085302fae0d0);
+            
+        
+
+        marker_4057ae4099978d8df9abe148373fbdaf.bindPopup(popup_b2c11e32eac0e0b6bb7ad01e56c13677)
+        ;
+
+        
+    
+    
+                marker_4057ae4099978d8df9abe148373fbdaf.setIcon(icon_8355574356b151491e8cedd22cd2607e);
+            
+    
+            marker_cluster_c46070dde4912db2a6dd48d77a47e733.addTo(map_4e0455bef95ace5d8911025d5798637c);
+        
+    
+            var marker_cluster_7cd8adfd1e77e2d12e83b8358a8fca4e = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_342978b4cccd987f89222c3ca383caba = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_7cd8adfd1e77e2d12e83b8358a8fca4e);
+        
+    
+            var icon_a38bcda564fa96b86e0178cf8564a459 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_260896e6300d5869f53c7a9e5cf98835 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e08c28cd495821c8359889d3c6366a20 = $(`<div id="html_e08c28cd495821c8359889d3c6366a20" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> TeleMallqui<br>             <b>RSSI:</b> -70 dBm<br>             <b>MAC:</b> B2:A6:11:D3:04:F9<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Intermedia<br>             <b>🕒</b> 2025-06-21T13:58:01.715085</div>`)[0];
+                popup_260896e6300d5869f53c7a9e5cf98835.setContent(html_e08c28cd495821c8359889d3c6366a20);
+            
+        
+
+        marker_342978b4cccd987f89222c3ca383caba.bindPopup(popup_260896e6300d5869f53c7a9e5cf98835)
+        ;
+
+        
+    
+    
+                marker_342978b4cccd987f89222c3ca383caba.setIcon(icon_a38bcda564fa96b86e0178cf8564a459);
+            
+    
+            var marker_75b1ed8b8ed8ce24834b07e57a65b446 = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_7cd8adfd1e77e2d12e83b8358a8fca4e);
+        
+    
+            var icon_d87cff00158bf485fc97425d6270e99e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7f4f71819c8cc8fc7587237453318050 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_178269bd294c4804ca7d0b300bf77625 = $(`<div id="html_178269bd294c4804ca7d0b300bf77625" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> LIFIEE-2020<br>             <b>RSSI:</b> -78 dBm<br>             <b>MAC:</b> 5C:A6:E6:9D:12:53<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Intermedia<br>             <b>🕒</b> 2025-06-21T13:58:02.221078</div>`)[0];
+                popup_7f4f71819c8cc8fc7587237453318050.setContent(html_178269bd294c4804ca7d0b300bf77625);
+            
+        
+
+        marker_75b1ed8b8ed8ce24834b07e57a65b446.bindPopup(popup_7f4f71819c8cc8fc7587237453318050)
+        ;
+
+        
+    
+    
+                marker_75b1ed8b8ed8ce24834b07e57a65b446.setIcon(icon_d87cff00158bf485fc97425d6270e99e);
+            
+    
+            marker_cluster_7cd8adfd1e77e2d12e83b8358a8fca4e.addTo(map_4e0455bef95ace5d8911025d5798637c);
+        
+    
+            var marker_cluster_1792c9c9d29c398d8e66b9910595fed7 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_cf3dd4e9d3e2648eb92793c276fc7cf1 = L.marker(
+                [-12.017064, -77.049103],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_28443f43062ee563e3ffcecd4d9a3eb7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_090cd926a772ddfae23640dc99dd59c6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2f2d0cc36f95889d362d3e949b185c2f = $(`<div id="html_2f2d0cc36f95889d362d3e949b185c2f" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> San Miguel Arcangel<br>             <b>RSSI:</b> -96 dBm<br>             <b>MAC:</b> 68:FF:7B:FC:AF:8E<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:57:56.639879</div>`)[0];
+                popup_090cd926a772ddfae23640dc99dd59c6.setContent(html_2f2d0cc36f95889d362d3e949b185c2f);
+            
+        
+
+        marker_cf3dd4e9d3e2648eb92793c276fc7cf1.bindPopup(popup_090cd926a772ddfae23640dc99dd59c6)
+        ;
+
+        
+    
+    
+                marker_cf3dd4e9d3e2648eb92793c276fc7cf1.setIcon(icon_28443f43062ee563e3ffcecd4d9a3eb7);
+            
+    
+            var marker_831b7554830f9a5254fd6b83c430cb35 = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_9c8e7c7dbf3f48448820e0a4ed4b1242 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97e1f81d23863bded3dab611c3514b3d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dd5d036153579d9d100882ba48d330a1 = $(`<div id="html_dd5d036153579d9d100882ba48d330a1" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> UNI_LIBRE_H<br>             <b>RSSI:</b> -84 dBm<br>             <b>MAC:</b> D8:10:9F:69:89:90<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:02.599229</div>`)[0];
+                popup_97e1f81d23863bded3dab611c3514b3d.setContent(html_dd5d036153579d9d100882ba48d330a1);
+            
+        
+
+        marker_831b7554830f9a5254fd6b83c430cb35.bindPopup(popup_97e1f81d23863bded3dab611c3514b3d)
+        ;
+
+        
+    
+    
+                marker_831b7554830f9a5254fd6b83c430cb35.setIcon(icon_9c8e7c7dbf3f48448820e0a4ed4b1242);
+            
+    
+            var marker_d6b6d64b4d21f063ad6e732bf8899817 = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_bd0f0909cb874242cd2a14a0fc5744cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_af73be15ebc51bfe634cdd60b5a3d1d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3721c60d39babd2860e4340abed78f1c = $(`<div id="html_3721c60d39babd2860e4340abed78f1c" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> TP-Link_1E8F<br>             <b>RSSI:</b> -85 dBm<br>             <b>MAC:</b> 84:D8:1B:69:1E:8F<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:03.611505</div>`)[0];
+                popup_af73be15ebc51bfe634cdd60b5a3d1d9.setContent(html_3721c60d39babd2860e4340abed78f1c);
+            
+        
+
+        marker_d6b6d64b4d21f063ad6e732bf8899817.bindPopup(popup_af73be15ebc51bfe634cdd60b5a3d1d9)
+        ;
+
+        
+    
+    
+                marker_d6b6d64b4d21f063ad6e732bf8899817.setIcon(icon_bd0f0909cb874242cd2a14a0fc5744cc);
+            
+    
+            var marker_c083ef06b635c5eb8517e0bbcc50b7da = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_46ca99a53e8cef7e2356bb290197b720 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0029b10222a0221299ec6552b882cd54 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_153ee21e09096ff62564a8e9d58ae496 = $(`<div id="html_153ee21e09096ff62564a8e9d58ae496" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> Note @.@<br>             <b>RSSI:</b> -86 dBm<br>             <b>MAC:</b> 66:B4:46:4A:7A:11<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:04.197262</div>`)[0];
+                popup_0029b10222a0221299ec6552b882cd54.setContent(html_153ee21e09096ff62564a8e9d58ae496);
+            
+        
+
+        marker_c083ef06b635c5eb8517e0bbcc50b7da.bindPopup(popup_0029b10222a0221299ec6552b882cd54)
+        ;
+
+        
+    
+    
+                marker_c083ef06b635c5eb8517e0bbcc50b7da.setIcon(icon_46ca99a53e8cef7e2356bb290197b720);
+            
+    
+            var marker_f89882cdda234b2f778b6d9ee4e8c823 = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_dc27b37ab8f3e5a64c21aae651792508 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e24a4f1797f618b98fd48d08a625818f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_43c736c1fa5fe9617efbb158e7d4ccb4 = $(`<div id="html_43c736c1fa5fe9617efbb158e7d4ccb4" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> UNI_LIBRE_H<br>             <b>RSSI:</b> -86 dBm<br>             <b>MAC:</b> CC:20:8C:BA:DC:30<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:04.589770</div>`)[0];
+                popup_e24a4f1797f618b98fd48d08a625818f.setContent(html_43c736c1fa5fe9617efbb158e7d4ccb4);
+            
+        
+
+        marker_f89882cdda234b2f778b6d9ee4e8c823.bindPopup(popup_e24a4f1797f618b98fd48d08a625818f)
+        ;
+
+        
+    
+    
+                marker_f89882cdda234b2f778b6d9ee4e8c823.setIcon(icon_dc27b37ab8f3e5a64c21aae651792508);
+            
+    
+            var marker_f62a7eae984b66eabdebac16ceabe25d = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_e72bf749b594bb425685b3ba1db1d000 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c450da45017a3a2c1e622d9e953f9f55 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5b9025c04d8b4a800fc1beedfb1a525b = $(`<div id="html_5b9025c04d8b4a800fc1beedfb1a525b" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> DIRECT-HAnRzEBAB16FDGOLS<br>             <b>RSSI:</b> -88 dBm<br>             <b>MAC:</b> E2:BB:9E:96:BC:98<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:05.071195</div>`)[0];
+                popup_c450da45017a3a2c1e622d9e953f9f55.setContent(html_5b9025c04d8b4a800fc1beedfb1a525b);
+            
+        
+
+        marker_f62a7eae984b66eabdebac16ceabe25d.bindPopup(popup_c450da45017a3a2c1e622d9e953f9f55)
+        ;
+
+        
+    
+    
+                marker_f62a7eae984b66eabdebac16ceabe25d.setIcon(icon_e72bf749b594bb425685b3ba1db1d000);
+            
+    
+            var marker_3b2a405b4f7091a1a448f8911e4ea846 = L.marker(
+                [-12.017097, -77.049088],
+                {
+}
+            ).addTo(marker_cluster_1792c9c9d29c398d8e66b9910595fed7);
+        
+    
+            var icon_0d848b2315c2463253ac9c52eab1767a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "wifi",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e91da741587ee86347fec2ea5031e19a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_15cbe03190a6afa05248a6cc0e1f4b36 = $(`<div id="html_15cbe03190a6afa05248a6cc0e1f4b36" style="width: 100.0%; height: 100.0%;"><b>📶 SSID:</b> UNI_LIBRE_H<br>             <b>RSSI:</b> -89 dBm<br>             <b>MAC:</b> C0:3F:DD:06:3A:20<br>             <b>Satélites:</b> 8<br>             <b>Calidad:</b> Mala<br>             <b>🕒</b> 2025-06-21T13:58:05.413904</div>`)[0];
+                popup_e91da741587ee86347fec2ea5031e19a.setContent(html_15cbe03190a6afa05248a6cc0e1f4b36);
+            
+        
+
+        marker_3b2a405b4f7091a1a448f8911e4ea846.bindPopup(popup_e91da741587ee86347fec2ea5031e19a)
+        ;
+
+        
+    
+    
+                marker_3b2a405b4f7091a1a448f8911e4ea846.setIcon(icon_0d848b2315c2463253ac9c52eab1767a);
+            
+    
+            marker_cluster_1792c9c9d29c398d8e66b9910595fed7.addTo(map_4e0455bef95ace5d8911025d5798637c);
+        
+    
+            var layer_control_fbc2a9e5baffab6cfd5eec4eee904f3b_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_c1ae53061c97d3bd1a355cc9417e649c,
+                    "Redes" : tile_layer_788608cfea8e20dcb8b91bfe1ecee7e4,
+                },
+                overlays :  {
+                    "\ud83d\udfe2 Buena" : marker_cluster_c46070dde4912db2a6dd48d77a47e733,
+                    "\ud83d\udfe0 Intermedia" : marker_cluster_7cd8adfd1e77e2d12e83b8358a8fca4e,
+                    "\ud83d\udd34 Mala" : marker_cluster_1792c9c9d29c398d8e66b9910595fed7,
+                },
+            };
+            let layer_control_fbc2a9e5baffab6cfd5eec4eee904f3b = L.control.layers(
+                layer_control_fbc2a9e5baffab6cfd5eec4eee904f3b_layers.base_layers,
+                layer_control_fbc2a9e5baffab6cfd5eec4eee904f3b_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_4e0455bef95ace5d8911025d5798637c);
+
+        
+</script>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mapa Wi-Fi Perú</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f9ff;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      color: #0284c7;
+      margin-bottom: 20px;
+    }
+    #start-section, #map-section {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 250px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #0284c7;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0369a1;
+    }
+    #map {
+      height: 80vh;
+      width: 90vw;
+      max-width: 1000px;
+      margin: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .note {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="start-section" class="container active">
+    <h1>Consulta la Intensidad del Wi-Fi en Perú</h1>
+    <input type="text" id="locationInput" placeholder="Escribe una ciudad o zona del Perú...">
+    <button onclick="startMapping()">Ver intensidad Wi-Fi</button>
+  </div>
+
+  <div id="map-section">
+    <div id="map"></div>
+    <div class="note">* Los datos mostrados son simulados para fines de demostración.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const zones = {
+      Lima: { lat: -12.0464, lng: -77.0428 },
+      Cusco: { lat: -13.5319, lng: -71.9675 },
+      Arequipa: { lat: -16.4090, lng: -71.5375 },
+    };
+
+    const signalLevels = [
+      { label: "Buena", color: "#4ade80" },
+      { label: "Intermedia", color: "#facc15" },
+      { label: "Mala", color: "#f87171" },
+    ];
+
+    function getFakeSignal() {
+      const random = Math.random();
+      if (random > 0.66) return { strength: -40, label: "Buena" };
+      if (random > 0.33) return { strength: -65, label: "Intermedia" };
+      return { strength: -85, label: "Mala" };
+    }
+
+    let map, circle, marker;
+
+    function startMapping() {
+      const location = document.getElementById('locationInput').value.trim();
+      const zone = zones[location];
+      if (!zone) {
+        alert("Zona no reconocida. Prueba con Lima, Cusco o Arequipa.");
+        return;
+      }
+
+      document.getElementById('start-section').classList.remove('active');
+      document.getElementById('map-section').classList.add('active');
+
+      if (!map) {
+        map = L.map('map').setView([zone.lat, zone.lng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      } else {
+        map.setView([zone.lat, zone.lng], 13);
+      }
+
+      const signal = getFakeSignal();
+      const level = signalLevels.find(s => s.label === signal.label);
+      const color = level ? level.color : "#000";
+
+      if (circle) map.removeLayer(circle);
+      if (marker) map.removeLayer(marker);
+
+      circle = L.circle([zone.lat, zone.lng], {
+        radius: 300,
+        color,
+        fillColor: color,
+        fillOpacity: 0.5
+      }).addTo(map);
+
+      marker = L.marker([zone.lat, zone.lng]).addTo(map)
+        .bindPopup(`Intensidad de Señal: <strong>${signal.strength} dBm</strong><br>Clasificación: <span style="color:${color}">${signal.label}</span>`)
+        .openPopup();
+    }
+  </script>
+</body>
+</html>
